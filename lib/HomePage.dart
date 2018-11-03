@@ -110,9 +110,12 @@ class _HomePage extends State<HomePage> {
           body: Center(
               child: Column(
                 children: <Widget>[
-                  Text(
-                    "This months remaining budget:",
-                    style: TextStyle(fontSize: 20.0),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "This months remaining budget:",
+                      style: TextStyle(fontSize: 20.0),
+                    )
                   ),
                   Text(
                     "\$" + _budget,
