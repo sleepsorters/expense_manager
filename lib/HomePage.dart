@@ -75,7 +75,8 @@ class _HomePage extends State<HomePage> {
                   onPressed: ((){
                     Navigator.of(context).pop();
                     String name = nameController.text.toString();
-                    expenseList.add(Expense(name: name, value: int.parse(priceController.text.toString()), category: categoryController.text.toString()));
+                    int price = int.parse(priceController.text.toString());
+                    expenseList.add(Expense(name: name, value: price, category: categoryController.text.toString()));
                     showModalBottomSheet<void>(
                         context: context,
                         builder: (BuildContext context) {
@@ -89,6 +90,9 @@ class _HomePage extends State<HomePage> {
                                           color: Theme.of(context).primaryColor,
                                           ))));
                         });
+                    setState((){
+                      _budget = (int.parse(_budget) - int.parse(priceController.text.toString())).toString();
+                    });
                     nameController.clear();
                     categoryController.clear();
                     priceController.clear();

@@ -26,17 +26,16 @@ class ExpenseListItem extends ListTile {
 
   ExpenseListItem(Expense expense):
         super(
-          title: new Text(expense.name),
-          subtitle: new Row(
+          title: new Row(
               children: <Widget>[
                 Expanded(
-                  child: Text(expense.category, textAlign: TextAlign.left),
+                  child: Text(expense.name, textAlign: TextAlign.left),
                 ),
                 Expanded(
                   child: Text("\$" + expense.value.toString(), textAlign: TextAlign.right),
                 )
               ]
           ),
-          isThreeLine: true
+          subtitle: new Text(expense.category)
       );
 }
