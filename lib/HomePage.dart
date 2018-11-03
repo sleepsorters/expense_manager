@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:expense/ExpensePage.dart';
+import 'package:expense/Expense.dart';
 
 class HomePage extends StatefulWidget {
   _HomePage hP;
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
   String _budget = "";
-
+  List<Expense> expenseList = [];
   final myController = TextEditingController();
 
   @override
@@ -27,6 +28,8 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+      
       void _show() {
         showDialog(
             context: context,
@@ -55,6 +58,9 @@ class _HomePage extends State<HomePage> {
       }
 
       void _addItem() {
+        final nameController = TextEditingController();
+        final categoryController = TextEditingController();
+        final priceController = TextEditingController();
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -62,7 +68,31 @@ class _HomePage extends State<HomePage> {
               return SimpleDialog(
                 title: new Text("Add expense"),
                 children: <Widget>[
-
+                  TextField(controller: nameController, decoration: InputDecoration(border: InputBorder.none, hintText: "Item"),),
+                  TextField(controller: categoryController, decoration: InputDecoration(border: InputBorder.none, hintText: "Category"),),
+                  TextField(controller: priceController, decoration: InputDecoration(border: InputBorder.none, hintText: "Price"),),
+                  FlatButton(child: Text("Save"),
+                  onPressed: ((){
+                    Navigator.of(context).pop();
+                    String name = nameController.text.toString();
+                    expenseList.add(Expense(name: name, value: int.parse(priceController.text.toString()), category: categoryController.text.toString()));
+                    showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return new Container(
+                              child: new Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: new Text(
+                                      'Your item, ' + name + ', has been added!',
+                                      textAlign: TextAlign.center,
+                                      style: new TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          ))));
+                        });
+                    nameController.clear();
+                    categoryController.clear();
+                    priceController.clear();
+                  }),)
                 ],
               );
             }
@@ -72,7 +102,9 @@ class _HomePage extends State<HomePage> {
       return MaterialApp(
         title: 'Welcome to Flutter',
         home: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text('Your spending'),
           ),
           body: Center(
@@ -99,7 +131,7 @@ class _HomePage extends State<HomePage> {
                           child: Text("View purchases"),
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                              ExpensePage()));
+                              ExpensePage.withList(expenseList)));
                         })
                   )
               ]),
@@ -107,10 +139,9 @@ class _HomePage extends State<HomePage> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               _addItem();
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>
-              ExpensePage()));
             },
-            tooltip: 'Increment',
+            backgroundColor: Theme.of(context).accentColor,
+            tooltip: 'Add item',
             child: Icon(Icons.add),
             elevation: 2.0,
           ),

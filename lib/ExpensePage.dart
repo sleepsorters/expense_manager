@@ -14,10 +14,23 @@ class ExpensePage extends StatefulWidget {
     hP = new _ExpensePageState();
   }
 
+  ExpensePage.withList(List eL) {
+    hP = new _ExpensePageState.withList(eL);
+  }
+
   }
 
 class _ExpensePageState extends State<ExpensePage> {
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
+
+  List expenseList;
+  _ExpensePageState() {
+    expenseList = null;
+  }
+
+  _ExpensePageState.withList(List eL) {
+    expenseList = eL;
+  }
 
   var url, request, response;
   String value, error;
@@ -45,9 +58,9 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Location'),
+          title: Text('Purchase History'),
         ),
-        body: new ExpenseList(expenses.toList())
+        body: new ExpenseList(expenseList)
 
     );
   }
