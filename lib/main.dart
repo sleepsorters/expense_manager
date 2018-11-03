@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expense/HomePage.dart';
 import 'package:expense/ExpensePage.dart';
+import 'package:expense/ImageClassifier.dart';
 
 void main() => runApp(new MyApp());
 

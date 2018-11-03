@@ -107,8 +107,8 @@ class _HomePage extends State<HomePage> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               _addItem();
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>
-              ExpensePage()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              //ExpensePage()));
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),
