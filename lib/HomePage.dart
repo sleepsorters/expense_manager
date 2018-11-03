@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:expense/ExpensePage.dart';
 
 class HomePage extends StatefulWidget {
   _HomePage hP;
@@ -53,22 +54,15 @@ class _HomePage extends State<HomePage> {
         );
       }
 
-      void _showa() {
+      void _addItem() {
         showDialog(
             context: context,
             builder: (BuildContext context) {
               // return object of type Dialog
-              return AlertDialog(
-                title: new Text("Set your budget!"),
-                content: Text(myController.text),
-                actions: <Widget>[
-                  // usually buttons at the bottom of the dialog
-                  new FlatButton(
-                    child: new Text("Close"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+              return SimpleDialog(
+                title: new Text("Add expense"),
+                children: <Widget>[
+
                 ],
               );
             }
@@ -98,8 +92,27 @@ class _HomePage extends State<HomePage> {
                     child: RaisedButton(
                         child: Text("Set your budget"),
                         onPressed: _show)
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 200.0),
+                      child: RaisedButton(
+                          child: Text("View purchases"),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              ExpensePage()));
+                        })
                   )
               ]),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _addItem();
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              ExpensePage()));
+            },
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+            elevation: 2.0,
           ),
         ),
       );
