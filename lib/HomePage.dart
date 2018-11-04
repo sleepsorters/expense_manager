@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
   String _budget = "1000.00";
-  double allowance = 100.00;
+  double allowance = 1000.00;
   double expenditures = 0.00;
   Color indicator = Colors.green[400];
   List<Expense> expenseList = [];
@@ -74,7 +74,8 @@ class _HomePage extends State<HomePage> {
             builder: (BuildContext context) {
               // return object of type Dialog
               return SimpleDialog(
-                title: new Text("Add expense"),
+                titlePadding: EdgeInsets.only(top:30.0, left: 15.0),
+                title: new Text("Add expense", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(left: 15.0),
@@ -82,7 +83,7 @@ class _HomePage extends State<HomePage> {
                   ),
                   Padding(
                       padding: EdgeInsets.only(left: 15.0),
-                      child: TextField(controller: categoryController, decoration: InputDecoration(border: InputBorder.none, hintText: "Category"),)
+                      child: TextField(controller: categoryController, decoration: InputDecoration(border: InputBorder.none, hintText: "Vendor"),)
                   ),
                   Padding(
                       padding: EdgeInsets.only(left: 15.0),
@@ -140,7 +141,7 @@ class _HomePage extends State<HomePage> {
           onPressed: _show,
         )],
             backgroundColor: Theme.of(context).primaryColor,
-            title: Text('Your spending'),
+            title: Text('November'),
           ),
           body: Column(
             children: <Widget>[
@@ -148,16 +149,23 @@ class _HomePage extends State<HomePage> {
 
                 height: 260.0,
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(left: 10.0, right: 150.0, top: 50.0, bottom: 10.0),
-                          child: Text("Balance", style: TextStyle(color: Colors.white, fontSize: 20.0), textAlign: TextAlign.left,),
+                          padding: const EdgeInsets.only(left: 12.0, top: 50.0, bottom: 10.0),
+                          child: Text("Balance", style: TextStyle(color: Colors.white, fontSize: 25.0, fontFamily: "Muli"), textAlign: TextAlign.left,),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 55.0), textAlign: TextAlign.left,),
+                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 52.0, fontFamily: "Muli"), textAlign: TextAlign.left,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: Text("of \$$allowance" + "0", style: TextStyle(color: Colors.white, fontSize: 27.0, fontFamily: "Muli", fontStyle: FontStyle.italic), textAlign: TextAlign.left,),
                         )
                       ],
                     ),
@@ -168,7 +176,7 @@ class _HomePage extends State<HomePage> {
                         lineWidth: 7.0,
                         percent: max((allowance - expenditures) / allowance, 0.0),
                         progressColor: indicator,
-                        center: Text((((allowance - expenditures) / allowance) * 100 ).toString() + "%", style: TextStyle(fontSize: 30.0, color: Colors.white),),
+                        center: Text((((allowance - expenditures) / allowance) * 100 ).floor().toString() + "%", style: TextStyle(fontSize: 30.0, color: Colors.white),),
                       ),
                     ),
                   ],
@@ -191,10 +199,21 @@ class _HomePage extends State<HomePage> {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  child: Text('Lili Chen'),
+                  child: Text('User Name', style: TextStyle(color: Colors.white),),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).secondaryHeaderColor,
+                    color: Theme.of(context).accentColor,
                   ),
+                ),
+                ListTile(
+                  title: Text('Analytics'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                        ExpensePage.withList(expenseList)));
+                    Navigator.pop(context);
+                  },
                 ),
                 ListTile(
                   title: Text('Purchase History'),

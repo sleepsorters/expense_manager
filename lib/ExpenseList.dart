@@ -28,13 +28,24 @@ class ExpenseListItem extends ListTile {
           title: new Row(
               children: <Widget>[
                 Expanded(
-                  child: Text(expense.name, textAlign: TextAlign.left),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(expense.name, textAlign: TextAlign.left),
+                  ),
                 ),
                 Expanded(
                   child: Text("\$" + (expense.value).toStringAsFixed(2), textAlign: TextAlign.right),
-                )
+                ),
+
               ]
           ),
-          subtitle: new Text(expense.category),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Text(expense.category, textAlign: TextAlign.left,),
+              Divider(color: Colors.black)
+            ],
+          ),
+
       );
 }

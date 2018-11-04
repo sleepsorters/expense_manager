@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFF720D5D),
         secondaryHeaderColor: const Color(0xFFE30425),
         textSelectionColor: Colors.white,
+        fontFamily: "Raleway"
       ),
       home: new HomePage(),
     );
