@@ -67,9 +67,11 @@ class _ExpensePageState extends State<ExpensePage> {
 
   Future<Set<Expense>> fetchExpenses() async {
     Set<Expense> expenses = new Set<Expense>();
+    /*
     expenses.add(Expense(name: "Sheng Kee", value: 100, category: "boba"));
     expenses.add(Expense(name: "Sheng Kee", value: 200, category: "boba"));
     expenses.add(Expense(name: "La Vals", value: 100, category: "pizza"));
+    */
     return expenses;
   }
 

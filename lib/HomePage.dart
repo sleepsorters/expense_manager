@@ -15,7 +15,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
-  String _budget = "";
+  String _budget = "100.00";
+  double allowance = 100.00;
+  double expenditures = 0.00;
   List<Expense> expenseList = [];
   final myController = TextEditingController();
 
@@ -47,7 +49,8 @@ class _HomePage extends State<HomePage> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       setState((){
-                        _budget = myController.text;
+                        allowance = double.parse(myController.text);
+                        _budget = (allowance - expenditures).toStringAsFixed(2);
                       });
                     },
                   ),
@@ -75,7 +78,8 @@ class _HomePage extends State<HomePage> {
                   onPressed: ((){
                     Navigator.of(context).pop();
                     String name = nameController.text.toString();
-                    expenseList.add(Expense(name: name, value: int.parse(priceController.text.toString()), category: categoryController.text.toString()));
+                    double price = double.parse(priceController.text.toString());
+                    expenseList.add(Expense(name: name, value: price, category: categoryController.text.toString()));
                     showModalBottomSheet<void>(
                         context: context,
                         builder: (BuildContext context) {
@@ -89,6 +93,10 @@ class _HomePage extends State<HomePage> {
                                           color: Theme.of(context).primaryColor,
                                           ))));
                         });
+                    setState((){
+                      expenditures += double.parse(priceController.text.toString());
+                      _budget = (allowance - expenditures).toStringAsFixed(2);
+                    });
                     nameController.clear();
                     categoryController.clear();
                     priceController.clear();
@@ -110,29 +118,33 @@ class _HomePage extends State<HomePage> {
           body: Center(
               child: Column(
                 children: <Widget>[
-                  Text(
-                    "This months remaining budget:",
-                    style: TextStyle(fontSize: 20.0),
+                  Padding(
+                    padding: EdgeInsets.only(top: 200.0),
+                    child: Text(
+                      "This months remaining budget:",
+                      style: TextStyle(fontSize: 20.0),
+                    )
                   ),
                   Text(
                     "\$" + _budget,
                     style: TextStyle(fontSize: 50.0),
                   ),
-
-                  Padding(
-                    padding: EdgeInsets.only(top: 200.0),
-                    child: RaisedButton(
-                        child: Text("Set your budget"),
-                        onPressed: _show)
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(top: 200.0),
-                      child: RaisedButton(
-                          child: Text("View purchases"),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                              ExpensePage.withList(expenseList)));
-                        })
+                  Row(
+                      children: <Widget>[
+                      Expanded(
+                        child: RaisedButton(
+                            child: Text("Change your budget"),
+                            onPressed: _show)
+                      ),
+                      Expanded(
+                        child: RaisedButton(
+                            child: Text("View purchases"),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                  ExpensePage.withList(expenseList)));
+                            })
+                      )
+                      ]
                   )
               ]),
           ),
