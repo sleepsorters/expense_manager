@@ -162,7 +162,7 @@ class _HomePage extends State<HomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 52.0, fontFamily: "Muli"), textAlign: TextAlign.left,),
+                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 45.0, fontFamily: "Muli"), textAlign: TextAlign.left,), //fontSize: 50
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 12.0),

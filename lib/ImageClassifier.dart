@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expense/ImageInformation.dart';
 import 'package:expense/InfoFetcher.dart';
+import 'package:expense/Keyword.dart';
 
 class ImageClassifier extends StatefulWidget {
   _ImageClassifier hP;
@@ -14,7 +15,9 @@ class ImageClassifier extends StatefulWidget {
 
 class _ImageClassifier extends State<ImageClassifier> {
   Set<ImageInformation> _infos;
+  Set<Keyword> _keywords;
   List<Widget> _widgetList = [Text("")];
+  List<Widget> _widgetList2 = [Text("")];
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
 
   @override
@@ -27,8 +30,12 @@ class _ImageClassifier extends State<ImageClassifier> {
   initPlatformState() async {
     InfoFetcher infoFetcher = new InfoFetcher();
     _infos = await infoFetcher.fetchInfo();
+    _keywords = await infoFetcher.fetchKeywords();
+    print(_keywords);
+
     setState((){
       _widgetList = getFormattedCategories(_infos);
+      _widgetList2 = getFormattedKeywords(_keywords);
     });
   }
 
@@ -38,6 +45,18 @@ class _ImageClassifier extends State<ImageClassifier> {
       ListTile lt = ListTile(
           title: Text((info.category + " (score: " + info.score.toStringAsFixed(2) + ")"), style: TextStyle(fontSize: 14.0)),
           subtitle: new LinearProgressIndicator(value: info.score, backgroundColor: Theme.of(context).highlightColor, valueColor: new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))
+      );
+      ret.add(lt);
+    }
+    return ret;
+  }
+
+  List <Widget> getFormattedKeywords(keywords) {
+    List<Widget> ret = [Padding(padding: EdgeInsets.only(top: 20.0, left: 20.0), child: Text("TOP KEYWORDS", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)))];
+    for (var keyword in keywords) {
+      ListTile lt = ListTile(
+          title: Text((keyword.word + " (relevance: " + keyword.relevance.toStringAsFixed(2) + ")"), style: TextStyle(fontSize: 14.0)),
+          subtitle: new LinearProgressIndicator(value: keyword.relevance, backgroundColor: Theme.of(context).highlightColor, valueColor: new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))
       );
       ret.add(lt);
     }
@@ -64,7 +83,7 @@ class _ImageClassifier extends State<ImageClassifier> {
               title: Text(title)
           ),
           body: ListView(
-              children: _widgetList
+              children: new List.from(_widgetList)..addAll(_widgetList2)
           )
       ),
     );
