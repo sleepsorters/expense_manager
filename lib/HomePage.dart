@@ -152,17 +152,17 @@ class _HomePage extends State<HomePage> {
                     Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(left: 10.0, right: 150.0, top: 50.0, bottom: 10.0),
+                          padding: const EdgeInsets.only(left: 10.0, right: 120.0, top: 50.0, bottom: 10.0), //left: 10.0, right: 150.0
                           child: Text("Balance", style: TextStyle(color: Colors.white, fontSize: 20.0), textAlign: TextAlign.left,),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 55.0), textAlign: TextAlign.left,),
+                          padding: const EdgeInsets.only(left: 0.0), //left: 8.0
+                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 40.0), textAlign: TextAlign.left,), //fontSize: 55.0
                         )
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
+                      padding: const EdgeInsets.only(left: 0.0), //left: 12.0
                       child: new CircularPercentIndicator(
                         radius: 150.0,
                         lineWidth: 7.0,

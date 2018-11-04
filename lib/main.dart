@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         secondaryHeaderColor: const Color(0xFFE30425),
         textSelectionColor: Colors.white,
       ),
-      home: new HomePage(),
+      home: new ImageClassifier(),
     );
   }
 }
