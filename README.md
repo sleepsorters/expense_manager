@@ -4,6 +4,4 @@ Minimalist, easy-to-use expense tracker for college students featuring an analyt
 
 ## Screenshots
 
-![Screenshot](image1.png)
-![Screenshot](image2.png)
-![Screenshot](image3.png)
+![Screenshot](image1.png) ![Screenshot](image2.png) ![Screenshot](image3.png)
