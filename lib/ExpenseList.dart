@@ -23,7 +23,6 @@ class ExpenseList extends StatelessWidget {
 }
 
 class ExpenseListItem extends ListTile {
-
   ExpenseListItem(Expense expense):
         super(
           title: new Row(
@@ -36,6 +35,6 @@ class ExpenseListItem extends ListTile {
                 )
               ]
           ),
-          subtitle: new Text(expense.category)
+          subtitle: new Text(expense.category),
       );
 }
