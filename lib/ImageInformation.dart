@@ -1,5 +1,6 @@
 class ImageInformation {
-  final List<String> classifiers;
+  final String category;
+  final double score;
 
-  ImageInformation({this.classifiers});
+  ImageInformation(this.category, this.score);
 }

@@ -13,6 +13,7 @@ class ImageClassifier extends StatefulWidget {
 }
 
 class _ImageClassifier extends State<ImageClassifier> {
+  String _categories = "";
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
 
   @override
@@ -25,11 +26,19 @@ class _ImageClassifier extends State<ImageClassifier> {
   initPlatformState() async {
     InfoFetcher infoFetcher = new InfoFetcher();
     Set<ImageInformation> infos = await infoFetcher.fetchInfo();
+    setState((){
+      _categories = "";
+
+      for (var info in infos) {
+        _categories += info.category + "\n" + info.score.toString() + "\n";
+      }
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final title = 'Basic List';
+    final title = 'Analytics';
 
     return MaterialApp(
       title: title,
@@ -38,7 +47,10 @@ class _ImageClassifier extends State<ImageClassifier> {
               backgroundColor: Theme.of(context).primaryColor,
               title: Text(title)
           ),
-          body: Container(child: Text('hi'))
+          body: Padding(
+              padding: EdgeInsets.only(top: 20.0, left: 20.0),
+              child: Text(_categories)
+          )
       ),
     );
   }
