@@ -196,3 +196,5 @@ class CirclePainter extends CustomPainter {
     return true;
   }
 }
+
+//@source: https://pub.dartlang.org/packages/percent_indicator by Diego Velasquez
