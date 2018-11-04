@@ -119,7 +119,7 @@ class _HomePage extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: 10.0),
+                    padding: EdgeInsets.only(top: 200.0),
                     child: Text(
                       "This months remaining budget:",
                       style: TextStyle(fontSize: 20.0),
@@ -129,21 +129,22 @@ class _HomePage extends State<HomePage> {
                     "\$" + _budget,
                     style: TextStyle(fontSize: 50.0),
                   ),
-
-                  Padding(
-                    padding: EdgeInsets.only(top: 200.0),
-                    child: RaisedButton(
-                        child: Text("Set your budget"),
-                        onPressed: _show)
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(top: 200.0),
-                      child: RaisedButton(
-                          child: Text("View purchases"),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                              ExpensePage.withList(expenseList)));
-                        })
+                  Row(
+                      children: <Widget>[
+                      Expanded(
+                        child: RaisedButton(
+                            child: Text("Change your budget"),
+                            onPressed: _show)
+                      ),
+                      Expanded(
+                        child: RaisedButton(
+                            child: Text("View purchases"),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                  ExpensePage.withList(expenseList)));
+                            })
+                      )
+                      ]
                   )
               ]),
           ),
