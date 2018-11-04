@@ -37,7 +37,7 @@ class _ImageClassifier extends State<ImageClassifier> {
     for (var info in infos) {
       ListTile lt = ListTile(
           title: Text((info.category + " (score: " + info.score.toStringAsFixed(2) + ")"), style: TextStyle(fontSize: 14.0)),
-          subtitle: new LinearProgressIndicator(value: info.score)
+          subtitle: new LinearProgressIndicator(value: info.score, backgroundColor: Theme.of(context).highlightColor, valueColor: new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))
       );
       ret.add(lt);
     }
@@ -52,6 +52,14 @@ class _ImageClassifier extends State<ImageClassifier> {
       title: title,
       home: Scaffold(
           appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                tooltip: 'Back',
+                onPressed: (() {
+                  Navigator.pop(context);
+                }
+                ),
+              ),
               backgroundColor: Theme.of(context).primaryColor,
               title: Text(title)
           ),

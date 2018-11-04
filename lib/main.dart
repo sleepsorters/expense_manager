@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:expense/HomePage.dart';
 import 'package:expense/ExpensePage.dart';
 import 'package:expense/ImageClassifier.dart';
-import 'package:expense/DBTest.dart';
 
 void main() => runApp(new MyApp());
 
@@ -23,9 +22,11 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primaryColor: const Color(0xFF5D1049),
         backgroundColor: const Color(0xFF4E0D3A),
+        highlightColor: const Color(0xFFc42193),
         accentColor: const Color(0xFF720D5D),
         secondaryHeaderColor: const Color(0xFFE30425),
         textSelectionColor: Colors.white,
+        fontFamily: "Raleway"
       ),
       home: new HomePage(),
     );
