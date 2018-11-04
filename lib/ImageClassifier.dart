@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:expense/ImageInformation.dart';
 import 'package:expense/InfoFetcher.dart';
 import 'package:expense/Keyword.dart';
+import 'package:expense/Expense.dart';
+import 'package:expense/ExpenseList.dart';
 
 class ImageClassifier extends StatefulWidget {
   _ImageClassifier hP;
@@ -11,9 +13,22 @@ class ImageClassifier extends StatefulWidget {
   ImageClassifier() {
     hP = new _ImageClassifier();
   }
+
+  ImageClassifier.withExpenseList(List<Expense> eL) {
+    hP = new _ImageClassifier.withExpenseList(eL);
+  }
 }
 
 class _ImageClassifier extends State<ImageClassifier> {
+  List<Expense> expenseList;
+  String expenseListString = "";
+  _ImageClassifier() {
+    expenseList = [];
+  }
+  _ImageClassifier.withExpenseList(List<Expense> eL) {
+    expenseList = eL;
+    expenseList.forEach((expense) => expenseListString += (expense.name + "\""));
+  }
   Set<ImageInformation> _infos;
   Set<Keyword> _keywords;
   List<Widget> _widgetList = [Text("")];
@@ -29,7 +44,7 @@ class _ImageClassifier extends State<ImageClassifier> {
 
   initPlatformState() async {
     InfoFetcher infoFetcher = new InfoFetcher();
-    _infos = await infoFetcher.fetchInfo();
+    _infos = await infoFetcher.fetchInfo(expenseListString);
     _keywords = await infoFetcher.fetchKeywords();
     print(_keywords);
 

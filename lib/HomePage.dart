@@ -212,7 +212,7 @@ class _HomePage extends State<HomePage> {
                     // ...
                     // Then close the drawer
                     Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        ImageClassifier()));
+                        ImageClassifier.withExpenseList(expenseList)));
                   },
                 ),
                 ListTile(

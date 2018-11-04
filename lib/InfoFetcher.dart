@@ -14,6 +14,7 @@ class InfoFetcher {
   Set<Keyword> _keywords;
   var _result;
   int _statusCode;
+  String str;
 
   InfoFetcher() {
     _statusCode = 0;
@@ -23,12 +24,12 @@ class InfoFetcher {
   Set<ImageInformation> get imageinfos => _imageinfos;
   Set<Keyword> get keywords => _keywords;
 
-  Future<Set<ImageInformation>> fetchInfo() async {
+  Future<Set<ImageInformation>> fetchInfo(String expenseListString) async {
     _imageinfos = new Set<ImageInformation>();
     var url = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-19";
     print(url);
     //var text = "I still have a dream. It is a dream deeply rooted in the American dream. I have a dream that one day this nation will rise up and live out the true meaning of its creed: \"We hold these truths to be self-evident, that all men are created equal.\"";
-    var text = "beef hot soup hotpot \"honeydew boba \"movie ticket \"concert \"rent \"toiletries \"hot sauce \"mayo \"green tea boba \"milk tea boba \"green tea boba \"green tea boba";
+    var text = expenseListString;
     var body = json.encode(
         {"text": text,
           "features":
