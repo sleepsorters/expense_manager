@@ -15,7 +15,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
-  String _budget = "";
+  String _budget = "100.00";
+  double allowance = 100.00;
+  double expenditures = 0.00;
   List<Expense> expenseList = [];
   final myController = TextEditingController();
 
@@ -47,7 +49,8 @@ class _HomePage extends State<HomePage> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       setState((){
-                        _budget = myController.text;
+                        allowance = double.parse(myController.text);
+                        _budget = (allowance - expenditures).toStringAsFixed(2);
                       });
                     },
                   ),
@@ -75,7 +78,7 @@ class _HomePage extends State<HomePage> {
                   onPressed: ((){
                     Navigator.of(context).pop();
                     String name = nameController.text.toString();
-                    int price = int.parse(priceController.text.toString());
+                    double price = double.parse(priceController.text.toString());
                     expenseList.add(Expense(name: name, value: price, category: categoryController.text.toString()));
                     showModalBottomSheet<void>(
                         context: context,
@@ -91,7 +94,8 @@ class _HomePage extends State<HomePage> {
                                           ))));
                         });
                     setState((){
-                      _budget = (int.parse(_budget) - int.parse(priceController.text.toString())).toString();
+                      expenditures += double.parse(priceController.text.toString());
+                      _budget = (allowance - expenditures).toStringAsFixed(2);
                     });
                     nameController.clear();
                     categoryController.clear();

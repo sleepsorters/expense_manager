@@ -32,7 +32,7 @@ class ExpenseListItem extends ListTile {
                   child: Text(expense.name, textAlign: TextAlign.left),
                 ),
                 Expanded(
-                  child: Text("\$" + expense.value.toString(), textAlign: TextAlign.right),
+                  child: Text("\$" + (expense.value).toStringAsFixed(2), textAlign: TextAlign.right),
                 )
               ]
           ),

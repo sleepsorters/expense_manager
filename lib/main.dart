@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
         // counter didn't reset back to zero; the application is not restarted.
-        primaryColor: const Color(0xFF0d1f2d),
-        backgroundColor: const Color(0xFFfae1df),
-        accentColor: const Color(0xFFe4c3ad),
+        primaryColor: const Color(0xFF1b2927),
+        backgroundColor: const Color(0xFFd5e3e1),
+        accentColor: const Color(0xFFAAAD75),
         secondaryHeaderColor: const Color(0xFF546a7b),
         textSelectionColor: Colors.white,
       ),
