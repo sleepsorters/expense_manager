@@ -6,6 +6,7 @@ import 'package:expense/ExpensePage.dart';
 import 'package:expense/Expense.dart';
 import 'package:expense/ExpenseList.dart';
 import 'package:expense/sample_circular_page.dart';
+import 'package:expense/ImageClassifier.dart';
 
 class HomePage extends StatefulWidget {
   _HomePage hP;
@@ -211,8 +212,7 @@ class _HomePage extends State<HomePage> {
                     // ...
                     // Then close the drawer
                     Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        ExpensePage.withList(expenseList)));
-                    Navigator.pop(context);
+                        ImageClassifier()));
                   },
                 ),
                 ListTile(
