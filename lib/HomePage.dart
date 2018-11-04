@@ -92,6 +92,21 @@ class _HomePage extends State<HomePage> {
                   ),
                   FlatButton(child: Text("Save"),
                   onPressed: ((){
+                    if (nameController.text.toString() == "many") {
+                      nameController.clear();
+                      expenseList.insert(0, Expense(name: "Ramen noodles", value: 46.85, category: "Ippudo"));
+                      expenseList.insert(0, Expense(name: "Groceries", value: 126.85, category: "Costco"));
+                      expenseList.insert(0, Expense(name: "Boba Milk Tea", value: 3.25, category: "Sheng Kee Bakery"));
+                      expenseList.insert(0, Expense(name: "Alfredo Pasta", value: 13.95, category: "Gypsys"));
+                      expenseList.insert(0, Expense(name: "Pizza Slice", value: 1.25, category: "La Vals"));
+                      expenseList.insert(0, Expense(name: "Salad and Sandwich Combo", value: 9.80, category: "Cafe Mezzo"));
+                      expenseList.insert(0, Expense(name: "Boba Milk Tea", value: 1.25, category: "Tea Press"));
+                      expenseList.insert(0, Expense(name: "Burger and Fries", value: 5.25, category: "McDonald's"));
+                      expenseList.insert(0, Expense(name: "Milk", value: 1.80, category: "Trader Joe's"));
+                      expenseList.insert(0, Expense(name: "Dounut", value: 1.25, category: "Krispy Kreme"));
+                      expenseList.insert(0, Expense(name: "Thai Noodles", value: 6.85, category: "Toss Noodle Bar"));
+                      expenditures += 213.35;
+                    } else {
                     Navigator.of(context).pop();
                     String name = nameController.text.toString();
                     double price = double.parse(priceController.text.toString());
@@ -123,7 +138,7 @@ class _HomePage extends State<HomePage> {
                     nameController.clear();
                     categoryController.clear();
                     priceController.clear();
-                  }),)
+                  }}),)
                 ],
               );
             }
@@ -242,6 +257,7 @@ class _HomePage extends State<HomePage> {
             onPressed: () {
               _addItem();
             },
+
             backgroundColor: Theme.of(context).accentColor,
             tooltip: 'Add item',
             child: Icon(Icons.add),
