@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expense/HomePage.dart';
 import 'package:expense/ExpensePage.dart';
 import 'package:expense/ImageClassifier.dart';
+import 'package:expense/DBTest.dart';
 
 void main() => runApp(new MyApp());
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         secondaryHeaderColor: const Color(0xFFE30425),
         textSelectionColor: Colors.white,
       ),
-      home: new ImageClassifier(),
+      home: new HomePage(),
     );
   }
 }

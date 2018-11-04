@@ -24,7 +24,7 @@ class InfoFetcher {
     var url = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-19";
     print(url);
     //var text = "I still have a dream. It is a dream deeply rooted in the American dream. I have a dream that one day this nation will rise up and live out the true meaning of its creed: \"We hold these truths to be self-evident, that all men are created equal.\"";
-    var text = "beef hot soup hotpot \"honeydew boba \"movie ticket \"concert \"rent \"toiletries \"hot sauce \"mayo \"green tea boba \"milk tea boba \"green tea boba \"green tea boba";
+    var text = "beef hot soup hotpot \"honeydew boba \"movie ticket \"concert \"rent \"toiletries \"hot sauce \"mayo \"green tea boba \"milk tea boba \"green tea boba \"green tea boba \"movie \"movie \"hulu subscription";
     var body = json.encode(
         {"text": text,
           "features":
