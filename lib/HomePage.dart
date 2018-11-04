@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:expense/ExpensePage.dart';
 import 'package:expense/Expense.dart';
+import 'package:expense/ExpenseList.dart';
 import 'package:expense/sample_circular_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -141,46 +142,45 @@ class _HomePage extends State<HomePage> {
             backgroundColor: Theme.of(context).primaryColor,
             title: Text('Your spending'),
           ),
-          body: Center(
-              child: ListView(
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 80.0, bottom: 20.0),
-                      child: Text(
-                        "This months remaining budget:",
-                        style: TextStyle(fontSize: 20.0),
-                      )
-                    ),
-                  ),
+          body: Column(
+            children: <Widget>[
+              Container(
 
-                  new CircularPercentIndicator(
-                    radius: 260.0,
-                    lineWidth: 7.0,
-                    percent: max((allowance - expenditures) / allowance, 0.0),
-                    progressColor: indicator,
-                    center: Text(
-                      "\$" + _budget,
-                      style: TextStyle(fontSize: 50.0),
+                height: 260.0,
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, right: 150.0, top: 50.0, bottom: 10.0),
+                          child: Text("Balance", style: TextStyle(color: Colors.white, fontSize: 20.0), textAlign: TextAlign.left,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text("\$$_budget", style: TextStyle(color: Colors.white, fontSize: 55.0), textAlign: TextAlign.left,),
+                        )
+                      ],
                     ),
-                  ),
-            Padding(
-              padding: EdgeInsets.only(top:30.0, left: 120.0, right: 120.0),
-              child: Container(
-                width: 40.0,
-                height: 40.0,
-                child: SizedBox(
-                  width: 40.0,
-                  child: RaisedButton(
-                      child: Text("View purchases"),
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                            ExpensePage.withList(expenseList)));
-                      }),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: new CircularPercentIndicator(
+                        radius: 150.0,
+                        lineWidth: 7.0,
+                        percent: max((allowance - expenditures) / allowance, 0.0),
+                        progressColor: indicator,
+                        center: Text((((allowance - expenditures) / allowance) * 100 ).toString() + "%", style: TextStyle(fontSize: 30.0, color: Colors.white),),
+                      ),
+                    ),
+                  ],
+                )
+              ),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: ExpenseList(expenseList),
                 ),
               )
-            )
-              ]),
+            ],
           ),
           drawer: Drawer(
             // Add a ListView to the drawer. This ensures the user can scroll
