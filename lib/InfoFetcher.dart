@@ -19,29 +19,27 @@ class InfoFetcher {
 
   Set<ImageInformation> get imageinfos => _imageinfos;
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
   Future<Set<ImageInformation>> fetchInfo() async {
     _imageinfos = new Set<ImageInformation>();
-    var url = "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?version=2018-03-19";
+    var url = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-19";
     print(url);
-    final path = await _localPath;
-
+    //var text = "I still have a dream. It is a dream deeply rooted in the American dream. I have a dream that one day this nation will rise up and live out the true meaning of its creed: \"We hold these truths to be self-evident, that all men are created equal.\"";
+    var text = "beef hot soup hotpot \"honeydew boba \"movie";
+    var body = json.encode(
+        {"text": text,
+          "features":
+          {"categories": {}
+          }
+        });
     var response = await http.post(
       url,
       headers:
       {
         HttpHeaders
-            .AUTHORIZATION: "Bearer eyJraWQiOiIyMDE3MTAzMC0wMDowMDowMCIsImFsZyI6IlJTMjU2In0.eyJpYW1faWQiOiJpYW0tU2VydmljZUlkLWMwNjcxZjk5LTcwNDQtNGEwYy1hZDI5LWI3ODY5ZjVjZTdmYSIsImlkIjoiaWFtLVNlcnZpY2VJZC1jMDY3MWY5OS03MDQ0LTRhMGMtYWQyOS1iNzg2OWY1Y2U3ZmEiLCJyZWFsbWlkIjoiaWFtIiwiaWRlbnRpZmllciI6IlNlcnZpY2VJZC1jMDY3MWY5OS03MDQ0LTRhMGMtYWQyOS1iNzg2OWY1Y2U3ZmEiLCJzdWIiOiJTZXJ2aWNlSWQtYzA2NzFmOTktNzA0NC00YTBjLWFkMjktYjc4NjlmNWNlN2ZhIiwic3ViX3R5cGUiOiJTZXJ2aWNlSWQiLCJ1bmlxdWVfaW5zdGFuY2VfY3JucyI6WyJjcm46djE6Ymx1ZW1peDpwdWJsaWM6d2F0c29uLXZpc2lvbi1jb21iaW5lZDp1cy1zb3V0aDphLzNhMmU3MzA3Y2ZjYzRlZDZhOGUzMjU3YTk4MTJlOThmOjE3ZTI4ZGE1LWIzYWYtNGJiMC04MWVjLWUxMzM0MmI3MDdjZDo6Il0sImFjY291bnQiOnsiYnNzIjoiM2EyZTczMDdjZmNjNGVkNmE4ZTMyNTdhOTgxMmU5OGYifSwiaWF0IjoxNTQxMjg2NTU4LCJleHAiOjE1NDEyOTAxNTgsImlzcyI6Imh0dHBzOi8vaWFtLmJsdWVtaXgubmV0L2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.Ypf-K5F1ymjYZFtf8g4fu8RV_okf8dG-hgAAHyOAaaMvg_zedukl2N8bsNjAsiPA_u4zN8uua4MQtpM2AFwq4bBdffgMKln2VfgMkdjTC6cFPkObdz2D6_Uc4bSfB1KqKmW-eFmJc75KSWP6k2EWHzyjIiTpB2ADdcGO_HJ1dlFWyBPmINtN7tP65eYZ8qkuy-vMFBRuC0OtkBRlkaRX7TeF4mTq-aDomIyLpWArZVEszJVX4WvQq4z_RSLrKQ2u4jnAlgNHGjbri9gUEGt38xvtCEH1E4P8eE1T4X6Z_6OB2_H0LQY6-Md6GQcR_Up_Dbx1LOENkNZDEyPvadrc7w"
+            .AUTHORIZATION: "Bearer eyJraWQiOiIyMDE3MTAzMC0wMDowMDowMCIsImFsZyI6IlJTMjU2In0.eyJpYW1faWQiOiJpYW0tU2VydmljZUlkLWE1M2I2NzkwLWE3OWUtNDE1ZS1hOTFkLWJhMmU1MmYwMWUzNCIsImlkIjoiaWFtLVNlcnZpY2VJZC1hNTNiNjc5MC1hNzllLTQxNWUtYTkxZC1iYTJlNTJmMDFlMzQiLCJyZWFsbWlkIjoiaWFtIiwiaWRlbnRpZmllciI6IlNlcnZpY2VJZC1hNTNiNjc5MC1hNzllLTQxNWUtYTkxZC1iYTJlNTJmMDFlMzQiLCJzdWIiOiJTZXJ2aWNlSWQtYTUzYjY3OTAtYTc5ZS00MTVlLWE5MWQtYmEyZTUyZjAxZTM0Iiwic3ViX3R5cGUiOiJTZXJ2aWNlSWQiLCJ1bmlxdWVfaW5zdGFuY2VfY3JucyI6WyJjcm46djE6Ymx1ZW1peDpwdWJsaWM6bmF0dXJhbC1sYW5ndWFnZS11bmRlcnN0YW5kaW5nOnVzLXNvdXRoOmEvM2EyZTczMDdjZmNjNGVkNmE4ZTMyNTdhOTgxMmU5OGY6MWFlM2Y1YjktZTU5NC00YWIzLTkyM2YtNWUxZjRlYzgwZjllOjoiXSwiYWNjb3VudCI6eyJic3MiOiIzYTJlNzMwN2NmY2M0ZWQ2YThlMzI1N2E5ODEyZTk4ZiJ9LCJpYXQiOjE1NDEyOTcxMDMsImV4cCI6MTU0MTMwMDcwMywiaXNzIjoiaHR0cHM6Ly9pYW0uYmx1ZW1peC5uZXQvaWRlbnRpdHkiLCJncmFudF90eXBlIjoidXJuOmlibTpwYXJhbXM6b2F1dGg6Z3JhbnQtdHlwZTphcGlrZXkiLCJzY29wZSI6ImlibSBvcGVuaWQiLCJjbGllbnRfaWQiOiJkZWZhdWx0IiwiYWNyIjoxLCJhbXIiOlsicHdkIl19.Ds5UQX8WXiOYjtm5_X1BvQcxABnKIJFPkBolYK0XIhwThvcOaGe9wLiPNH_qnIwRiuNSPuBRgyxo2qiuvx1llALkhPWH8o5chnYam0P4SGGDtskDsKtlJs0NvUU2R_4JZtRf0p8O4_Xq22tLkznC9ttAXXtWvvHOO8ZmDdECcnI3kSey9fOZvt5uLXoHWM65GEzwIw-TlvruSv3gDA8SPnyUXiTfClXJBze-lXMnUZ_V1Uo4QopP1Qa-U_naN2GYO_TgiGGTV4WfCHi-oGI6CqKFmVlduddTpx7WxsLXgzk72Wz5yWxiJEOGvNx9HQWr2r6unAkljSMdWGqRFOYU6g",
+        HttpHeaders.CONTENT_TYPE: "application/json"
       },
-      body: {
-        "images_file" : File('fruitbowl.jpg').readAsBytesSync()
-        //"url": "https://www.w3schools.com/w3css/img_lights.jpg"
-      }
+      body: body
     );
     print(response.body);
     _statusCode = response.statusCode;
