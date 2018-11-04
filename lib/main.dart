@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         textSelectionColor: Colors.white,
         fontFamily: "Raleway"
       ),
-      home: new HomePage(),
+      home: new ImageClassifier(),
     );
   }
 }

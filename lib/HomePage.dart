@@ -170,7 +170,7 @@ class _HomePage extends State<HomePage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
+                      padding: const EdgeInsets.only(left: 0.0), //left: 12.0
                       child: new CircularPercentIndicator(
                         radius: 150.0,
                         lineWidth: 7.0,

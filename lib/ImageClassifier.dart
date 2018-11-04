@@ -13,7 +13,8 @@ class ImageClassifier extends StatefulWidget {
 }
 
 class _ImageClassifier extends State<ImageClassifier> {
-  String _categories = "";
+  Set<ImageInformation> _infos;
+  List<Widget> _widgetList = [Text("")];
   noSuchMethod(Invocation i) => super.noSuchMethod(i);
 
   @override
@@ -25,15 +26,22 @@ class _ImageClassifier extends State<ImageClassifier> {
 
   initPlatformState() async {
     InfoFetcher infoFetcher = new InfoFetcher();
-    Set<ImageInformation> infos = await infoFetcher.fetchInfo();
+    _infos = await infoFetcher.fetchInfo();
     setState((){
-      _categories = "";
-
-      for (var info in infos) {
-        _categories += info.category + "\n" + info.score.toString() + "\n";
-      }
-
+      _widgetList = getFormattedCategories(_infos);
     });
+  }
+
+  List <Widget> getFormattedCategories(infos) {
+    List<Widget> ret = [Padding(padding: EdgeInsets.only(top: 20.0, left: 20.0), child: Text("TOP CATEGORIES", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)))];
+    for (var info in infos) {
+      ListTile lt = ListTile(
+          title: Text((info.category + " (score: " + info.score.toStringAsFixed(2) + ")"), style: TextStyle(fontSize: 14.0)),
+          subtitle: new LinearProgressIndicator(value: info.score)
+      );
+      ret.add(lt);
+    }
+    return ret;
   }
 
   @override
@@ -47,9 +55,8 @@ class _ImageClassifier extends State<ImageClassifier> {
               backgroundColor: Theme.of(context).primaryColor,
               title: Text(title)
           ),
-          body: Padding(
-              padding: EdgeInsets.only(top: 20.0, left: 20.0),
-              child: Text(_categories)
+          body: ListView(
+              children: _widgetList
           )
       ),
     );
