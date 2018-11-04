@@ -47,7 +47,7 @@ class InfoFetcher {
     _statusCode = response.statusCode;
     var categories = result["categories"];
     for (var category in categories) {
-      _imageinfos.add(new ImageInformation(category["label"], category["score"]));
+      _imageinfos.add(new ImageInformation(category: category["label"], score: category["score"]));
     }
     return _imageinfos;
   }
